@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: var(--color-zinc-900);
+  --foreground: var(--color-slate-50);
 }
 
 @theme inline {
@@ -12,11 +12,9 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  @apply fixed w-full max-h-screen flex justify-center mx-auto my-0 p-4;
 }
 
 body {
