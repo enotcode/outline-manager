@@ -1,11 +1,14 @@
 import { KeyIcon } from "./key-icon";
+import { CopyIcon } from "./copy-icon";
 
 export const Row = ({
   title,
   usageByUser,
+  onShareClick,
 }: {
   title: string;
   usageByUser: string;
+  onShareClick: () => void;
 }) => {
   return (
     <div className="w-full flex items-center space-x-4 p-3.5 rounded-lg bg-zinc-800">
@@ -18,6 +21,9 @@ export const Row = ({
           {usageByUser === "0" ? "Never used" : usageByUser}
         </span>
       </div>
+      <span onClick={onShareClick}>
+        <CopyIcon className="cursor-pointer hover:scale-110 transition-all" />
+      </span>
     </div>
   );
 };
