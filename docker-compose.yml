@@ -1,11 +1,11 @@
 services:
   outline-manager:
-    build: .
+    build:
+      context: .
+      args:
+        - OUTLINE_API_URL=${OUTLINE_API_URL}
+        - OUTLINE_FINGERPRINT=${OUTLINE_FINGERPRINT}
     ports:
       - "3000:3000"
-    environment:
-      - NODE_ENV=production
-      - OUTLINE_API_URL=${OUTLINE_API_URL}
-      - OUTLINE_FINGERPRINT=${OUTLINE_FINGERPRINT}
     command: bun run server.js
     restart: always
