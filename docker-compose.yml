@@ -5,9 +5,5 @@ services:
       args:
         - OUTLINE_API_URL=${OUTLINE_API_URL}
         - OUTLINE_FINGERPRINT=${OUTLINE_FINGERPRINT}
-    ports:
-      - "${APP_PORT:-4000}:3000"
-    env_file:
-      - .env
     command: bun run server.js
     restart: always
