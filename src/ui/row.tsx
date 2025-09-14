@@ -21,8 +21,11 @@ export const Row = ({
           {usageByUser === "0" ? "Never used" : usageByUser}
         </span>
       </div>
-      <span onClick={onShareClick}>
-        <CopyIcon className="cursor-pointer hover:scale-110 transition-all" />
+      <span
+        className="text-white cursor-pointer hover:text-teal-700 hover:scale-110 transition-all"
+        onClick={onShareClick}
+      >
+        <CopyIcon />
       </span>
     </div>
   );
