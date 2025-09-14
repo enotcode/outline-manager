@@ -17,3 +17,7 @@ export const getKeysList = async () => {
 export const getUsage = async () => {
   return (await client.getDataUsage()) as DataUsagePerAccessKey;
 };
+
+export const addKey = async (name: string) => {
+  return await client.createAccessKey({ name });
+};

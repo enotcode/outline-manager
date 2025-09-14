@@ -1,11 +1,12 @@
 import { getServerInfo, getKeysList, getUsage } from "../outline";
 import { HeaderWithInfo } from "../components/header-with-info";
 import { KeysList } from "../components/keys-list";
+import { AddKey } from "../components/add-key";
 import { formatBytes, sumObjectValues } from "../helpers";
 
 export default async function Home() {
   const serverInfo = await getServerInfo();
-  const keysList = await getKeysList();
+  const keysList = (await getKeysList()).reverse();
   const usage = await getUsage();
 
   const usageTotal = formatBytes(
@@ -19,6 +20,7 @@ export default async function Home() {
         keysList={keysList}
         usageTotal={usageTotal}
       />
+      <AddKey />
       <KeysList list={keysList} usage={usage.bytesTransferredByUserId} />
     </main>
   );
