@@ -1,9 +1,10 @@
 "use client";
 
 import { useState } from "react";
-import { toast } from "sonner";
 import copy from "copy-to-clipboard";
-import { AccessKey } from "outlinevpn-api";
+import { type AccessKey } from "outlinevpn-api";
+
+import { toast } from "../ui/toast";
 import { Row } from "../ui/row";
 import { Panel } from "../ui/panel";
 import { KeyDetails } from "./key-details";
@@ -29,13 +30,7 @@ export const KeysList = ({
             list.map((key) => {
               const onShareClick = () => {
                 copy(key.accessUrl);
-                toast.success("Link copied to clipboard", {
-                  classNames: {
-                    toast: "!bg-zinc-900/90",
-                    title: "!text-white !font-bold",
-                    icon: "!text-white",
-                  },
-                });
+                toast.success("Link copied to clipboard");
               };
 
               const onEyeClick = () => {

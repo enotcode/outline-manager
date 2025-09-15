@@ -1,10 +1,12 @@
-import { toast } from "sonner";
-import { AccessKey } from "outlinevpn-api";
+import { useState } from "react";
+import { type AccessKey } from "outlinevpn-api";
 import copy from "copy-to-clipboard";
 
+import { toast } from "../ui/toast";
 import { CopyIcon } from "../ui/copy-icon";
 import { Button } from "../ui/button";
-import { deleteKey } from "../actions";
+import { Input } from "../ui/input";
+import { deleteKey, renameKey } from "../actions";
 
 export const KeyDetails = ({
   selectedKey,
@@ -13,44 +15,45 @@ export const KeyDetails = ({
   selectedKey: AccessKey | null;
   onClose: () => void;
 }) => {
+  const [name, setName] = useState(selectedKey?.name || "");
+
   const onShareClick = () => {
     if (!selectedKey) return toast.error("Key not found");
     copy(selectedKey.accessUrl);
-    toast.success("Link copied to clipboard", {
-      classNames: {
-        toast: "!bg-zinc-900/90",
-        title: "!text-white !font-bold",
-        icon: "!text-white",
-      },
-    });
+    toast.success("Link copied to clipboard");
   };
 
   const onDeleteClick = async () => {
     if (!selectedKey) return toast.error("Key not found");
     try {
       await deleteKey(selectedKey.id);
-      toast.success("Key deleted successfully", {
-        classNames: {
-          toast: "!bg-zinc-900/90",
-          title: "!text-white !font-bold",
-          icon: "!text-white",
-        },
-      });
+      toast.success("Key deleted successfully");
       onClose();
     } catch (error) {
-      toast.error("Failed to delete key", {
-        classNames: {
-          toast: "!bg-red-900/90",
-          title: "!text-white !font-bold",
-          icon: "!text-white",
-        },
-      });
+      toast.error("Failed to delete key");
+    }
+  };
+
+  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (!selectedKey) return;
+    setName(e.target.value);
+  };
+
+  const onSaveClick = async () => {
+    if (!selectedKey) return;
+    if (name.trim() === "") return toast.error("Name is required");
+    try {
+      await renameKey(selectedKey.id, name);
+      toast.success("Key saved successfully");
+      onClose();
+    } catch (error) {
+      toast.error("Failed to save key");
     }
   };
 
   return (
     <div className="flex flex-col gap-4 mb-8">
-      <p className="font-medium text-gray-200">{selectedKey?.name}</p>
+      <Input type="text" value={name} onChange={onChangeName} maxLength={100} />
       <div className="flex gap-2 items-center">
         <pre
           className="m-0 p-2 overflow-auto bg-zinc-900 text-gray-200 rounded-lg font-mono text-sm leading-relaxed"
@@ -65,6 +68,9 @@ export const KeyDetails = ({
           <CopyIcon />
         </span>
       </div>
+      <Button onClick={onSaveClick} disabled={name === selectedKey?.name}>
+        Save
+      </Button>
       <Button variant="danger" onClick={onDeleteClick}>
         Delete
       </Button>
