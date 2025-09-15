@@ -18,8 +18,8 @@ export const Row = ({
       <span className="rounded-full bg-zinc-500/20 p-3">
         <KeyIcon />
       </span>
-      <div className="flex flex-col flex-1">
-        <h3 className="text-sm font-medium">{title}</h3>
+      <div className="flex flex-col flex-1 truncate">
+        <h3 className="text-sm font-medium truncate">{title}</h3>
         <span className="text-xs text-gray-400 font-normal">
           {usageByUser === "0" ? "Never used" : usageByUser}
         </span>
