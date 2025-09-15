@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AccessKey } from "outlinevpn-api";
 import copy from "copy-to-clipboard";
@@ -14,7 +13,6 @@ export const KeyDetails = ({
   selectedKey: AccessKey | null;
   onClose: () => void;
 }) => {
-  const router = useRouter();
   const onShareClick = () => {
     if (!selectedKey) return toast.error("Key not found");
     copy(selectedKey.accessUrl);
@@ -29,16 +27,25 @@ export const KeyDetails = ({
 
   const onDeleteClick = async () => {
     if (!selectedKey) return toast.error("Key not found");
-    await deleteKey(selectedKey.id);
-    toast.success("Key deleted successfully", {
-      classNames: {
-        toast: "!bg-zinc-900/90",
-        title: "!text-white !font-bold",
-        icon: "!text-white",
-      },
-    });
-    onClose();
-    router.refresh();
+    try {
+      await deleteKey(selectedKey.id);
+      toast.success("Key deleted successfully", {
+        classNames: {
+          toast: "!bg-zinc-900/90",
+          title: "!text-white !font-bold",
+          icon: "!text-white",
+        },
+      });
+      onClose();
+    } catch (error) {
+      toast.error("Failed to delete key", {
+        classNames: {
+          toast: "!bg-red-900/90",
+          title: "!text-white !font-bold",
+          icon: "!text-white",
+        },
+      });
+    }
   };
 
   return (
