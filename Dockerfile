@@ -25,6 +25,11 @@ ENV NODE_ENV=production
 # Disable telemetry during runtime
 ENV NEXT_TELEMETRY_DISABLED=1
 
+ARG OUTLINE_API_URL
+ARG OUTLINE_FINGERPRINT
+ENV OUTLINE_API_URL=$OUTLINE_API_URL
+ENV OUTLINE_FINGERPRINT=$OUTLINE_FINGERPRINT
+
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
 
