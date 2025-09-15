@@ -21,3 +21,7 @@ export const getUsage = async () => {
 export const addKey = async (name: string) => {
   return await client.createAccessKey({ name });
 };
+
+export const removeKey = async (id: string) => {
+  return await client.deleteAccessKey(id);
+};

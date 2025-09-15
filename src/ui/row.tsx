@@ -1,14 +1,17 @@
 import { KeyIcon } from "./key-icon";
 import { CopyIcon } from "./copy-icon";
+import { EyeIcon } from "./eye-icon";
 
 export const Row = ({
   title,
   usageByUser,
   onShareClick,
+  onEyeClick,
 }: {
   title: string;
   usageByUser: string;
   onShareClick: () => void;
+  onEyeClick: () => void;
 }) => {
   return (
     <div className="w-full flex items-center space-x-4 p-3.5 rounded-lg bg-zinc-800">
@@ -26,6 +29,12 @@ export const Row = ({
         onClick={onShareClick}
       >
         <CopyIcon />
+      </span>
+      <span
+        className="text-white cursor-pointer hover:text-teal-700 hover:scale-110 transition-all"
+        onClick={onEyeClick}
+      >
+        <EyeIcon />
       </span>
     </div>
   );

@@ -14,7 +14,7 @@ export default async function Home() {
   );
 
   return (
-    <main className="flex flex-col gap-8 w-full max-w-lg">
+    <main className="flex flex-col gap-8 w-full max-w-lg p-4">
       <HeaderWithInfo
         serverName={serverInfo.name}
         keysList={keysList}
