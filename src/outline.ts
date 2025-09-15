@@ -1,4 +1,8 @@
-import { OutlineVPN, AccessKey, DataUsagePerAccessKey } from "outlinevpn-api";
+import {
+  OutlineVPN,
+  type AccessKey,
+  type DataUsagePerAccessKey,
+} from "outlinevpn-api";
 
 const client = new OutlineVPN({
   apiUrl: process.env.OUTLINE_API_URL || "",
@@ -24,4 +28,8 @@ export const addKey = async (name: string) => {
 
 export const removeKey = async (id: string) => {
   return await client.deleteAccessKey(id);
+};
+
+export const renameAccessKey = async (id: string, name: string) => {
+  return await client.renameAccessKey(id, name);
 };
