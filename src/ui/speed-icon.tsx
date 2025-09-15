@@ -27,14 +27,14 @@ export const SpeedIcon = () => (
     <path
       d="M5 5L6.5 6.5"
       stroke="#fff"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       strokeLinecap="round"
     />
     <path d="M2 12H4" stroke="#fff" strokeWidth="1.5" strokeLinecap="round" />
     <path
       d="M19.9998 12L21.9998 12"
       stroke="#fff"
-      stroke-width="1.5"
+      strokeWidth="1.5"
       strokeLinecap="round"
     />
     <path

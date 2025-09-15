@@ -14,7 +14,7 @@
 
 html,
 body {
-  @apply fixed w-full max-h-screen flex justify-center mx-auto my-0 p-4;
+  @apply fixed w-full max-h-screen flex justify-center mx-auto my-0;
 }
 
 body {
