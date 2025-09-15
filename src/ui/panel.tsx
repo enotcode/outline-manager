@@ -24,6 +24,9 @@ export const Panel = ({
               <Drawer.Title className="font-bold mb-4 text-white">
                 {title}
               </Drawer.Title>
+              <Drawer.Description className="sr-only">
+                {title} details and actions
+              </Drawer.Description>
               {children}
             </div>
           </div>
