@@ -1,7 +1,7 @@
-import { toast } from "sonner";
-import { AccessKey } from "outlinevpn-api";
+import { type AccessKey } from "outlinevpn-api";
 import copy from "copy-to-clipboard";
 
+import { toast } from "../ui/toast";
 import { CopyIcon } from "../ui/copy-icon";
 import { Button } from "../ui/button";
 import { deleteKey } from "../actions";
@@ -16,35 +16,17 @@ export const KeyDetails = ({
   const onShareClick = () => {
     if (!selectedKey) return toast.error("Key not found");
     copy(selectedKey.accessUrl);
-    toast.success("Link copied to clipboard", {
-      classNames: {
-        toast: "!bg-zinc-900/90",
-        title: "!text-white !font-bold",
-        icon: "!text-white",
-      },
-    });
+    toast.success("Link copied to clipboard");
   };
 
   const onDeleteClick = async () => {
     if (!selectedKey) return toast.error("Key not found");
     try {
       await deleteKey(selectedKey.id);
-      toast.success("Key deleted successfully", {
-        classNames: {
-          toast: "!bg-zinc-900/90",
-          title: "!text-white !font-bold",
-          icon: "!text-white",
-        },
-      });
+      toast.success("Key deleted successfully");
       onClose();
     } catch (error) {
-      toast.error("Failed to delete key", {
-        classNames: {
-          toast: "!bg-red-900/90",
-          title: "!text-white !font-bold",
-          icon: "!text-white",
-        },
-      });
+      toast.error("Failed to delete key");
     }
   };
 
