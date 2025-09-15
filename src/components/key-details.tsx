@@ -1,4 +1,3 @@
-import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { AccessKey } from "outlinevpn-api";
 import copy from "copy-to-clipboard";
@@ -14,7 +13,6 @@ export const KeyDetails = ({
   selectedKey: AccessKey | null;
   onClose: () => void;
 }) => {
-  const router = useRouter();
   const onShareClick = () => {
     if (!selectedKey) return toast.error("Key not found");
     copy(selectedKey.accessUrl);
@@ -38,7 +36,6 @@ export const KeyDetails = ({
       },
     });
     onClose();
-    router.refresh();
   };
 
   return (
