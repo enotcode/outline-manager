@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "class-variance-authority": "^0.7.1",
     "copy-to-clipboard": "^3.3.3",
     "next": "15.5.3",
     "outlinevpn-api": "^3.0.0",
