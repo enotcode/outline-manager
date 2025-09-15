@@ -4,7 +4,7 @@ export const toast = {
   success: (message: string) => {
     return sonnerToast.success(message, {
       classNames: {
-        toast: "!bg-zinc-900/90",
+        toast: "!bg-teal-700 !border-none",
         title: "!text-white !font-bold",
         icon: "!text-white",
       },
@@ -14,7 +14,7 @@ export const toast = {
   error: (message: string) => {
     return sonnerToast.error(message, {
       classNames: {
-        toast: "!bg-red-900/90",
+        toast: "!bg-red-700 !border-none",
         title: "!text-white !font-bold",
         icon: "!text-white",
       },
