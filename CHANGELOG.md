@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.3.0]
+
+### Added
+
+- Key rename functionality
+- Updated toast notification styles
+
+### Fixed
+
+- Better text overflow handling for key titles
+
 ## [1.2.1]
 
 ### Added
