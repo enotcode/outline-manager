@@ -27,15 +27,25 @@ export const KeyDetails = ({
 
   const onDeleteClick = async () => {
     if (!selectedKey) return toast.error("Key not found");
-    await deleteKey(selectedKey.id);
-    toast.success("Key deleted successfully", {
-      classNames: {
-        toast: "!bg-zinc-900/90",
-        title: "!text-white !font-bold",
-        icon: "!text-white",
-      },
-    });
-    onClose();
+    try {
+      await deleteKey(selectedKey.id);
+      toast.success("Key deleted successfully", {
+        classNames: {
+          toast: "!bg-zinc-900/90",
+          title: "!text-white !font-bold",
+          icon: "!text-white",
+        },
+      });
+      onClose();
+    } catch (error) {
+      toast.error("Failed to delete key", {
+        classNames: {
+          toast: "!bg-red-900/90",
+          title: "!text-white !font-bold",
+          icon: "!text-white",
+        },
+      });
+    }
   };
 
   return (
