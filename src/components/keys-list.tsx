@@ -1,12 +1,12 @@
 "use client";
 
 import { useState } from "react";
-import copy from "copy-to-clipboard";
 import { type AccessKey } from "outlinevpn-api";
 
-import { toast } from "../ui/toast";
 import { Row } from "../ui/row";
 import { Panel } from "../ui/panel";
+import { useShareKey } from "../hooks/useShareKey";
+import { useDataLimit } from "../hooks/useDataLimit";
 import { KeyDetails } from "./key-details";
 import { formatBytes } from "../helpers";
 
@@ -28,10 +28,8 @@ export const KeysList = ({
         <div className="w-full flex flex-col gap-4">
           {list.length > 0 ? (
             list.map((key) => {
-              const onShareClick = () => {
-                copy(key.accessUrl);
-                toast.success("Link copied to clipboard");
-              };
+              const { shareKey } = useShareKey(key);
+              const { isEnabled, limitGB } = useDataLimit(key);
 
               const onEyeClick = () => {
                 setSelectedKey(key);
@@ -43,7 +41,8 @@ export const KeysList = ({
                   key={key.id}
                   title={key.name}
                   usageByUser={formatBytes(getUsageByUserId(key.id))}
-                  onShareClick={onShareClick}
+                  dataLimit={isEnabled ? limitGB.toString() : null}
+                  onShareClick={shareKey}
                   onEyeClick={onEyeClick}
                 />
               );

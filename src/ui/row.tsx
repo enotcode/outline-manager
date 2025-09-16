@@ -5,11 +5,13 @@ import { EyeIcon } from "./eye-icon";
 export const Row = ({
   title,
   usageByUser,
+  dataLimit,
   onShareClick,
   onEyeClick,
 }: {
   title: string;
   usageByUser: string;
+  dataLimit: string | null;
   onShareClick: () => void;
   onEyeClick: () => void;
 }) => {
@@ -21,7 +23,9 @@ export const Row = ({
       <div className="flex flex-col flex-1 truncate">
         <h3 className="text-sm font-medium truncate">{title}</h3>
         <span className="text-xs text-gray-400 font-normal">
-          {usageByUser === "0" ? "Never used" : usageByUser}
+          {usageByUser === "0"
+            ? "Never used"
+            : `${usageByUser} ${dataLimit ? `/ ${dataLimit} GB` : ""}`}
         </span>
       </div>
       <span
