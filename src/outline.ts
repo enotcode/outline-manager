@@ -33,3 +33,11 @@ export const removeKey = async (id: string) => {
 export const renameAccessKey = async (id: string, name: string) => {
   return await client.renameAccessKey(id, name);
 };
+
+export const addDataLimit = async (id: string, limit: number) => {
+  return await client.addDataLimit(id, limit);
+};
+
+export const deleteDataLimit = async (id: string) => {
+  return await client.deleteDataLimit(id);
+};

@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.0]
+
+### Added
+
+- Data limit functionality
+
 ## [1.3.0]
 
 ### Added

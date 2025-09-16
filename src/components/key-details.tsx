@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { type AccessKey } from "outlinevpn-api";
-import copy from "copy-to-clipboard";
 
 import { toast } from "../ui/toast";
 import { CopyIcon } from "../ui/copy-icon";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
+import { Toggle } from "../ui/toggle";
+
+import { useDataLimit } from "../hooks/useDataLimit";
+import { useShareKey } from "../hooks/useShareKey";
+
 import { deleteKey, renameKey } from "../actions";
 
 export const KeyDetails = ({
@@ -16,12 +20,8 @@ export const KeyDetails = ({
   onClose: () => void;
 }) => {
   const [name, setName] = useState(selectedKey?.name || "");
-
-  const onShareClick = () => {
-    if (!selectedKey) return toast.error("Key not found");
-    copy(selectedKey.accessUrl);
-    toast.success("Link copied to clipboard");
-  };
+  const dataLimit = useDataLimit(selectedKey);
+  const { shareKey } = useShareKey(selectedKey);
 
   const onDeleteClick = async () => {
     if (!selectedKey) return toast.error("Key not found");
@@ -34,16 +34,19 @@ export const KeyDetails = ({
     }
   };
 
-  const onChangeName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (!selectedKey) return;
-    setName(e.target.value);
-  };
-
   const onSaveClick = async () => {
     if (!selectedKey) return;
     if (name.trim() === "") return toast.error("Name is required");
+
     try {
-      await renameKey(selectedKey.id, name);
+      if (name !== selectedKey?.name) {
+        await renameKey(selectedKey.id, name);
+      }
+
+      if (dataLimit.hasChanges) {
+        await dataLimit.saveLimit();
+      }
+
       toast.success("Key saved successfully");
       onClose();
     } catch (error) {
@@ -51,9 +54,16 @@ export const KeyDetails = ({
     }
   };
 
+  const hasAnyChanges = name !== selectedKey?.name || dataLimit.hasChanges;
+
   return (
     <div className="flex flex-col gap-4 mb-8">
-      <Input type="text" value={name} onChange={onChangeName} maxLength={100} />
+      <Input
+        type="text"
+        value={name}
+        onChange={(e) => setName(e.target.value)}
+        maxLength={100}
+      />
       <div className="flex gap-2 items-center">
         <pre
           className="m-0 p-2 overflow-auto bg-zinc-900 text-gray-200 rounded-lg font-mono text-sm leading-relaxed"
@@ -63,12 +73,27 @@ export const KeyDetails = ({
         </pre>
         <span
           className="text-white cursor-pointer hover:text-teal-700 hover:scale-110 transition-all"
-          onClick={onShareClick}
+          onClick={shareKey}
         >
           <CopyIcon />
         </span>
       </div>
-      <Button onClick={onSaveClick} disabled={name === selectedKey?.name}>
+      <Toggle
+        label="Enable data limit"
+        checked={dataLimit.isEnabled}
+        onChange={(e) => dataLimit.toggleEnabled(e.target.checked)}
+      />
+      <div className="flex gap-2 items-center">
+        <Input
+          type="number"
+          value={dataLimit.limitGB}
+          onChange={(e) => dataLimit.updateLimit(Number(e.target.value))}
+          disabled={!dataLimit.isEnabled}
+          max={999}
+        />
+        <span>GB</span>
+      </div>
+      <Button onClick={onSaveClick} disabled={!hasAnyChanges}>
         Save
       </Button>
       <Button variant="danger" onClick={onDeleteClick}>

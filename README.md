@@ -26,7 +26,7 @@ Before running this application, you need:
 
 ### Getting Outline Server Credentials
 
-To get your Outline server API URL and fingerprint you can use this command:
+To get your Outline server API URL and fingerprint you can use this command on your Outline server:
 
 ```bash
 cd opt/outline && cat access.txt
@@ -94,7 +94,7 @@ The application will be available at `http://localhost:3000`
 
 1. **Connection Error**: Verify your `OUTLINE_API_URL` and `OUTLINE_FINGERPRINT`
 2. **Build Failures**: Ensure environment variables are set during Docker build
-3. **Port Conflicts**: Change the port mapping in docker-compose.yml if needed
+3. **Port Conflicts**: Change the port mapping in docker-compose.override.yml if needed
 
 ## 🤝 Contributing
 
@@ -104,7 +104,7 @@ The application will be available at `http://localhost:3000`
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-### Changelog
+### 🕑 Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for a list of changes.
 

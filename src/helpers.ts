@@ -18,3 +18,11 @@ export const formatBytes = (bytes: number, decimals = 2) => {
     sizes[i] || ""
   }`;
 };
+
+export const formatBytesToGB = (bytes: number) => {
+  return parseFloat((bytes / 1024 / 1024 / 1024).toFixed(2));
+};
+
+export const formatGBToBytes = (gb: number) => {
+  return gb * 1024 * 1024 * 1024;
+};
