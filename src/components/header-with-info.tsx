@@ -1,4 +1,4 @@
-import { type AccessKey } from "outlinevpn-api";
+import { type AccessKey } from "../types";
 
 import { InfoCard } from "../ui/info-card";
 import { KeyIcon } from "../ui/key-icon";

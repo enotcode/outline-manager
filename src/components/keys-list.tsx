@@ -1,8 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { type AccessKey } from "outlinevpn-api";
 
+import { type AccessKey } from "../types";
 import { Row } from "../ui/row";
 import { Panel } from "../ui/panel";
 import { useShareKey } from "../hooks/useShareKey";

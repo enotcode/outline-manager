@@ -1,8 +1,5 @@
-import {
-  OutlineVPN,
-  type AccessKey,
-  type DataUsagePerAccessKey,
-} from "outlinevpn-api";
+import { OutlineVPN, type DataUsagePerAccessKey } from "outlinevpn-api";
+import { type AccessKey } from "./types";
 
 const client = new OutlineVPN({
   apiUrl: process.env.OUTLINE_API_URL || "",
