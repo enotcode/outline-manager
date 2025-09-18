@@ -1,6 +1,6 @@
-import { type AccessKey } from "outlinevpn-api";
 import copy from "copy-to-clipboard";
 
+import { type AccessKey } from "../types";
 import { toast } from "../ui/toast";
 
 export const useShareKey = (selectedKey: AccessKey | null) => {

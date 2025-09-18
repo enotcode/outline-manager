@@ -1,5 +1,6 @@
 import { useState, useCallback, useEffect } from "react";
-import { type AccessKey } from "outlinevpn-api";
+
+import { type AccessKey } from "../types";
 
 import { toast } from "../ui/toast";
 
