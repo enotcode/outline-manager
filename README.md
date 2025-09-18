@@ -29,7 +29,7 @@ Before running this application, you need:
 To get your Outline server API URL and fingerprint you can use this command on your Outline server:
 
 ```bash
-cd opt/outline && cat access.txt
+cd /opt/outline && cat access.txt
 ```
 
 ## 🚀 Quick Start
@@ -54,19 +54,27 @@ cd opt/outline && cat access.txt
    Create a `.env.local` file in the root directory:
 
    ```env
-   OUTLINE_API_URL=https://your-outline-server:port/api
-   OUTLINE_FINGERPRINT=your-server-fingerprint
+   OUTLINE_API_URL=https://<your-outline-server>:<port>/api
+   OUTLINE_FINGERPRINT=<your-server-fingerprint>
    ```
 
 4. **Run the development server**
+
+   Default port is `3000`
 
    ```bash
    bun dev
    ```
 
+   or
+
+   ```bash
+   bun dev -p <port>
+   ```
+
 5. **Open your browser**
 
-   Navigate to [http://localhost:3000](http://localhost:3000)
+   Navigate to `<your-ip-address>:<port>`
 
 ## 🐳 Docker Deployment
 
@@ -77,24 +85,33 @@ cd opt/outline && cat access.txt
    Create a `.env` file with your Outline server credentials:
 
    ```env
-   OUTLINE_API_URL=https://your-outline-server:port/api
-   OUTLINE_FINGERPRINT=your-server-fingerprint
+   OUTLINE_API_URL=https://<your-outline-server>:<port>/api
+   OUTLINE_FINGERPRINT=<your-server-fingerprint>
    ```
 
 2. **Deploy with Docker Compose**
+
+   Default port is `3000`
+
    ```bash
    docker-compose up -d
    ```
 
-The application will be available at `http://localhost:3000`
+   or
+
+   ```bash
+   PORT=<port> docker-compose up -d
+   ```
+
+The application will be available at `<your-ip-address>:<port>`
 
 ## 🐛 Troubleshooting
 
 ### Common Issues
 
 1. **Connection Error**: Verify your `OUTLINE_API_URL` and `OUTLINE_FINGERPRINT`
-2. **Build Failures**: Ensure environment variables are set during Docker build
-3. **Port Conflicts**: Change the port mapping in docker-compose.override.yml if needed
+2. **Build Failures**: Ensure environment variables are set before Docker build
+3. **Port Conflicts**: Change the port mapping in `docker-compose.override.yml` if needed
 
 ## 🤝 Contributing
 
