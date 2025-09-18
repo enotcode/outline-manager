@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [1.4.2]
+
+### Fixed
+
+- **Critical**: Fixed crash after set limit key
+
 ## [1.4.1]
 
 ### Fixed
