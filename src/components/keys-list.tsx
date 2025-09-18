@@ -5,8 +5,6 @@ import { useState } from "react";
 import { type AccessKey } from "../types";
 import { Row } from "../ui/row";
 import { Panel } from "../ui/panel";
-import { useShareKey } from "../hooks/useShareKey";
-import { useDataLimit } from "../hooks/useDataLimit";
 import { KeyDetails } from "./key-details";
 import { formatBytes } from "../helpers";
 
@@ -28,9 +26,6 @@ export const KeysList = ({
         <div className="w-full flex flex-col gap-4">
           {list.length > 0 ? (
             list.map((key) => {
-              const { shareKey } = useShareKey(key);
-              const { isEnabled, limitGB } = useDataLimit(key);
-
               const onEyeClick = () => {
                 setSelectedKey(key);
                 setOpen(true);
@@ -39,10 +34,8 @@ export const KeysList = ({
               return (
                 <Row
                   key={key.id}
-                  title={key.name}
+                  accessKey={key}
                   usageByUser={formatBytes(getUsageByUserId(key.id))}
-                  dataLimit={isEnabled ? limitGB.toString() : null}
-                  onShareClick={shareKey}
                   onEyeClick={onEyeClick}
                 />
               );
